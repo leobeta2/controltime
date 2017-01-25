@@ -1,8 +1,31 @@
-<h2 class="page-header">Home</h2>
-<p>Bienvenido a Home</p>
+<h2 class="page-header">Registro de Actividades</h2>
+<h3>Usuario: {{user.username}} </h3>
 
-<div id="mapa">
+<div id="mapa" >
     
   </div>
+  <div id="infomapa">
+
+  </div>
+<h3>Datos</h3>
+<p>Nombre: {{user.name}}</p>
+<p>Hora:</p>
+<p>Fecha:</p>
+<hr>
+<div class="row">
+        <div class="col-lg-2">
+            <button type="button" class="btn btn-success" >Llegada</button>
+        </div>
+        <div class="col-lg-3">
+            <button type="button" class="btn btn-danger" >Salida</button>
+        </div>
+        <div class="col-lg-6">
+            <h2>Justificacion</h2>
+        <textarea rows="4" cols="50" float="center">
+Comentarios por atraso.
+        </textarea>
+        </div>
+</div>
 
   <script src="/js/mapa.js"></script>
+  
