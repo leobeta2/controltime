@@ -10,9 +10,41 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
+var moment = require('moment');
+var pg = require('pg');
 
+//conexion a mongo
 mongoose.connect('mongodb://localhost/loginapp');
 var db = mongoose.connection;
+
+//cpnexion postgress
+var config = {
+  user: 'devopsopti', //env var: PGUSER
+  database: 'SHOptimisa', //env var: PGDATABASE
+  password: 'eksiopco', //env var: PGPASSWORD
+  host: 'shoptimisa.cxddakjgf8mw.us-west-2.rds.amazonaws.com', // Server hosting the postgres database
+  port: 5432, //env var: PGPORT
+  max: 10, // max number of clients in the pool
+  idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
+};
+
+var pool = new pg.Pool(config);
+
+pool.connect(function(err, client, done) {
+  if(err) {
+    return console.error('error fetching client from pool', err);
+  }
+  client.query('SELECT id, "Nombre", "Flag", id_area_emp FROM public."Empleado";', function(err, result) {
+    //call `done()` to release the client back to the pool
+    done();
+
+    if(err) {
+      return console.error('error running query', err);
+    }
+    console.log(result);
+    //output: 1
+  });
+});
 
 var routes = require('./routes/index');
 var users = require('./routes/users');

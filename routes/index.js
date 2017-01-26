@@ -1,9 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
+
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res){
-	res.render('index');
+	var f = new Date();
+	var cad = f.getHours()+":"+f.getMinutes();
+	res.render('index',{ hora: cad, dia: f});
 });
 
 function ensureAuthenticated(req, res, next){
