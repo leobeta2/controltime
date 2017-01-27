@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
+var pg = require('pg');
 
 // User Schema
 var UserSchema = mongoose.Schema({

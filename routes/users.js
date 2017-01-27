@@ -15,6 +15,11 @@ router.get('/login', function(req, res){
   res.render('login');
 });
 
+//admin
+router.get('/admin', function(req,res){
+	res.render('admin');
+});
+
 
 //register users
 router.post('/register', function(req, res){
@@ -51,7 +56,7 @@ router.post('/register', function(req, res){
 			console.log(user);
 		});
 
-		req.flash('success_msg', 'You are registered and can now login');
+		req.flash('success_msg', 'Tu estas registrado, ya puedes loguearte');
 
 		res.redirect('/users/login');
 	}

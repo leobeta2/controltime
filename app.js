@@ -12,6 +12,7 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var moment = require('moment');
 var pg = require('pg');
+var pgp = require('pg-promise');
 
 //conexion a mongo
 mongoose.connect('mongodb://localhost/loginapp');
@@ -34,13 +35,16 @@ pool.connect(function(err, client, done) {
   if(err) {
     return console.error('error fetching client from pool', err);
   }
-  client.query('SELECT id, "Nombre", "Flag", id_area_emp FROM public."Empleado";', function(err, result) {
     //call `done()` to release the client back to the pool
+  //client.query('SELECT * FROM "Empleado";', function(err, result) {
+    
     done();
 
     if(err) {
-      return console.error('error running query', err);
-    }
+      return console.error('Error al ejecutar la consulta', err);
+    // }else{
+    //   return(result);
+     }
     console.log(result);
     //output: 1
   });
