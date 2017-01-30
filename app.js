@@ -36,18 +36,32 @@ pool.connect(function(err, client, done) {
     return console.error('error fetching client from pool', err);
   }
     //call `done()` to release the client back to the pool
-  //client.query('SELECT * FROM "Empleado";', function(err, result) {
-    
-    done();
+  //client.query('INSERT INTO "Area" VALUES (4, 'Desarrollo4')')
 
-    if(err) {
-      return console.error('Error al ejecutar la consulta', err);
-    // }else{
-    //   return(result);
-     }
-    console.log(result);
-    //output: 1
-  });
+var post  = {id_area: 6, Descripcion: 'Hello MySQL'};
+console.log(post);
+var query = client.query('INSERT INTO "Area" (id_area, "Descripcion") VALUES ($1,$2)', [6, 'hola'], function(error, result) {
+  if (error) {
+            console.log(error.message);
+        } else {
+            console.log('success');    
+        }
+  // Neat!
+});
+console.log(query); // INSERT INTO posts SET `id` = 1, `title` = 'Hello MySQL'
+  // client.query('SELECT * FROM "Area";', function(err, result) {
+
+    
+  //   done();
+
+  //   if(err) {
+  //     return console.error('Error al ejecutar la consulta', err);
+  //   // }else{
+  //   //   return(result);
+  //    }
+  //   console.log(result);
+  //   //output: 1
+  // });
 });
 
 var routes = require('./routes/index');
