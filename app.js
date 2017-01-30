@@ -18,6 +18,9 @@ var pgp = require('pg-promise');
 mongoose.connect('mongodb://localhost/loginapp');
 var db = mongoose.connection;
 
+//puerto 27017
+//mongoose.connect('mongodb://:@http://ec2-34-198-193-118.compute-1.amazonaws.com/:27017/prueba1');
+//var db = mongoose.connection;
 //cpnexion postgress
 var config = {
   user: 'devopsopti', //env var: PGUSER
@@ -38,17 +41,17 @@ pool.connect(function(err, client, done) {
     //call `done()` to release the client back to the pool
   //client.query('INSERT INTO "Area" VALUES (4, 'Desarrollo4')')
 
-var post  = {id_area: 6, Descripcion: 'Hello MySQL'};
-console.log(post);
-var query = client.query('INSERT INTO "Area" (id_area, "Descripcion") VALUES ($1,$2)', [6, 'hola'], function(error, result) {
-  if (error) {
-            console.log(error.message);
-        } else {
-            console.log('success');    
-        }
-  // Neat!
+//var post  = {id_area: 6, Descripcion: 'Hello MySQL'};
+//console.log(post);
+//var query = client.query('INSERT INTO "Area" (id_area, "Descripcion") VALUES ($1,$2)', [6, 'hola'], function(error, result) {
+  // if (error) {
+  //           console.log(error.message);
+  //       } else {
+  //           console.log('success');    
+  //       }
+  // // Neat!
 });
-console.log(query); // INSERT INTO posts SET `id` = 1, `title` = 'Hello MySQL'
+//console.log(query); // INSERT INTO posts SET `id` = 1, `title` = 'Hello MySQL'
   // client.query('SELECT * FROM "Area";', function(err, result) {
 
     
@@ -62,7 +65,7 @@ console.log(query); // INSERT INTO posts SET `id` = 1, `title` = 'Hello MySQL'
   //   console.log(result);
   //   //output: 1
   // });
-});
+//});
 
 var routes = require('./routes/index');
 var users = require('./routes/users');

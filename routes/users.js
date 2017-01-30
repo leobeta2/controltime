@@ -56,11 +56,12 @@ router.post('/register', function(req, res){
 			console.log(user);
 		});
 
-		req.flash('success_msg', 'Tu estas registrado, ya puedes loguearte');
+		req.flash('success_msg', 'Estas registrado, ya puedes loguearte');
 
 		res.redirect('/users/login');
 	}
 });
+
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
