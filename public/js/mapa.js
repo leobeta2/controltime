@@ -11,3 +11,4 @@ var divInfomapa = document.getElementById('infomapa');
     divMapa.innerHTML = '<img src="http://maps.googleapis.com/maps/api/staticmap?size=700x350&markers='+coordenada+'"/>';
     divInfomapa.innerHTML=coordenada;
   }
+

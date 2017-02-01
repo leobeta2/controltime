@@ -13,6 +13,7 @@ var mongoose = require('mongoose');
 var moment = require('moment');
 var pg = require('pg');
 var pgp = require('pg-promise');
+var getIP = require('ipware')().get_ip;
 
 //conexion a mongo
 mongoose.connect('mongodb://localhost/loginapp');
@@ -39,18 +40,31 @@ pool.connect(function(err, client, done) {
     return console.error('error fetching client from pool', err);
   }
     //call `done()` to release the client back to the pool
-  //client.query('INSERT INTO "Area" VALUES (4, 'Desarrollo4')')
 
 //var post  = {id_area: 6, Descripcion: 'Hello MySQL'};
 //console.log(post);
-//var query = client.query('INSERT INTO "Area" (id_area, "Descripcion") VALUES ($1,$2)', [6, 'hola'], function(error, result) {
-  // if (error) {
-  //           console.log(error.message);
-  //       } else {
-  //           console.log('success');    
-  //       }
-  // // Neat!
+//var query = client.query('INSERT INTO "Area" (id_area, "Descripcion") VALUES ($1,$2)', [9, 'prueba'], function(error, result) {
+//  var query = client.query('INSERT INTO "Registro" ("id_empleado", "Timestamp_local", "Timestamp_GMT", "Data_ip", "Coordenada", "Comentario", "id_Tipo_Registro") VALUES ($1,$2,$3,$4,$5,$6,$7)'
+  //, ['lvidal', new Date(), new Date(), 'b', 'ni_idea', 'justifi', 1], function(err, result) {
+ // console.log(query);
+ // done();
+
+   // if(err) {
+    //  return console.error('error running query', err);
+   // }
+    //output: 1
+  //});
 });
+
+pool.on('error', function (err, client) {
+  // if an error is encountered by a client while it sits idle in the pool
+  // the pool itself will emit an error event with both the error and
+  // the client which emitted the original error
+  // this is a rare occurrence but can happen if there is a network partition
+  // between your application and the database, the database restarts, etc.
+  // and so you might want to handle it and at least log it out
+  console.error('idle client error', err.message, err.stack)
+})
 //console.log(query); // INSERT INTO posts SET `id` = 1, `title` = 'Hello MySQL'
   // client.query('SELECT * FROM "Area";', function(err, result) {
 
@@ -66,6 +80,7 @@ pool.connect(function(err, client, done) {
   //   //output: 1
   // });
 //});
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -118,6 +133,14 @@ app.use(expressValidator({
 
 // connect Flash
 app.use(flash());
+
+//se obtiene la ip del cliente
+app.use(function(req, res, next) {
+    var ipInfo = getIP(req);
+    console.log(ipInfo);
+    // { clientIp: '127.0.0.1', clientIpRoutable: false }
+    next();
+});
 
 //Global Vars
 // Global Vars

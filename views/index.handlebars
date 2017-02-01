@@ -11,11 +11,14 @@
 <h3>Datos</h3>
 <p>Nombre: {{user.name}}</p>
 <p>Hora:{{hora}}</p>
+<p>lat: {{lat}}</p>
 <hr>
 <div class="row">
         <div class="col-lg-2">
                 <form action="/" method="post">
-                        <button type="submit" class="btn btn-success" >Llegada</button>
+                        <input type="hidden" name="latitude" value=""/>
+                        <input type="hidden" name="longitude" value=""/>
+                        <button type="submit" class="btn btn-success" disabled>Llegada</button>
                 </form>
         </div>
         <div class="col-lg-3">
@@ -30,4 +33,4 @@ Comentarios por atraso.
 </div>
 
   <script src="/js/mapa.js"></script>
-  
+}</script>

@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var moment = require('moment');
-var GPS = require('gps');
+
+
 
 
 // Get Homepage
@@ -28,12 +29,8 @@ router.post('/', function(req, res){
 	var email = req.user.email;//mail empleado
 	var id = email.substring(0, email.indexOf("@")); //substring del email empleado
 	var horaLocal = moment().format('LTS');// hora local
-	var horaGMT = new Date(Date.UTC(96, 11, 1, 0, 0, 0));// hora GMT
-	var gps = new GPS;
-	gps.on('data', function() {
-    console.log(data, gps.state);
-});
-	
+	var horaGMT = new Date(Date.UTC());// hora GMT
+	console.log(req.body);
 });
 
 module.exports = router;
